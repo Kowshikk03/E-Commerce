@@ -1,0 +1,88 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 fixed-top shadow-sm">
+  <div class="container-fluid px-4">
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold fs-3 d-flex align-items-center" href="{% url 'home' %}">
+      <i class="fa fa-cart-plus me-2 text-warning"></i> ShopCart
+    </a>
+
+    <!-- Toggle for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" 
+            aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="navbarMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3 mt-3 mt-lg-0">
+
+        <!-- Home -->
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center" href="{% url 'home' %}">
+            <i class="fa fa-home me-2"></i> Home
+          </a>
+        </li>
+
+        <!-- Categories -->
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center" href="{% url 'collections' %}">
+            <i class="fa fa-th-large me-2"></i> Categories
+          </a>
+        </li>
+
+        <!-- Cart -->
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center" href="{% url 'cart' %}">
+            <i class="fa fa-shopping-cart me-2"></i> Cart
+          </a>
+        </li>
+
+        <!-- Favourites -->
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center" href="{% url 'favviewpage' %}">
+            <i class="fa fa-heart me-2"></i> Favourites
+          </a>
+        </li>
+
+        <!-- Authenticated User Dropdown -->
+        {% if request.user.is_authenticated %}
+        <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button"
+     data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-controls="userDropdownMenu">
+    <i class="fa fa-user-circle me-2 text-info fs-5"></i>
+    <span>{{ request.user.username }}</span>
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end animate__animated animate__fadeIn shadow rounded-3"
+      aria-labelledby="userDropdown" id="userDropdownMenu">
+    <li>
+      <a class="dropdown-item d-flex align-items-center" href="{% url 'profile' %}">
+        <i class="fa fa-user me-2"></i> Profile
+      </a>
+    </li>
+    <li><hr class="dropdown-divider"></li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}">
+        <i class="fa fa-sign-out me-2"></i> Logout
+      </a>
+    </li>
+  </ul>
+</li>
+
+        {% else %}
+        <!-- Login -->
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center" href="{% url 'login' %}">
+            <i class="fa fa-sign-in me-2"></i> Login
+          </a>
+        </li>
+
+        <!-- Sign Up -->
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center" href="{% url 'register' %}">
+            <i class="fa fa-user-plus me-2"></i> Sign Up
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>

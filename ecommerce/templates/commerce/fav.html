@@ -1,0 +1,55 @@
+{% extends 'commerce/layouts/main.html' %}
+
+{% block title %}
+  Favourite Items | ShopCart
+{% endblock title %}
+
+{% block content %}
+
+<hr>
+<hr>
+<section class="bg-light py-4 my-5" style="min-height:600px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-3">Favourite Items</h4>
+        <hr style="border-color:#b8bfc2;">
+      </div>
+      <div class="col-12">
+        {% if fav %}
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover align-middle text-center">
+            <thead class="table-secondary">
+              <tr>
+                <th>Image</th>
+                <th>Product Name</th>
+                <th>Unit</th>
+                <th>Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in fav %}
+              <tr>
+                <td><img src="{{ item.product.product_image.url }}" height="75" alt="{{ item.product.name }}"></td>
+                <td>{{ item.product.name }}</td>
+                <td>&#8377;{{ item.product.selling_price|stringformat:"d" }}</td>
+                <td>
+                  <a href="{% url 'remove_fav' item.id %}" onclick="return confirm('Are you sure you want to remove this item?')" class="btn btn-danger btn-sm">
+                    <i class="fa fa-trash"></i> Remove
+                  </a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <div class="alert alert-info text-center">
+          You have no favourite items.
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
